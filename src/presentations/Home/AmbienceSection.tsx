@@ -5,7 +5,9 @@ import DasanaSalad from "../../assets/menu/signature/dasana-salad.jpg";
 import BetawiTenderloin from "../../assets/menu/signature/soto-betawi-tenderloin.jpg";
 import { useScroll, useTransform, motion } from "framer-motion";
 import { AiFillBook } from "react-icons/ai";
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
+import HeroImageTwo from "../../assets/home/home-2.jpg";
+import { Parallax } from "react-scroll-parallax";
 
 const signatureMenus = [
 	{
@@ -17,51 +19,45 @@ const signatureMenus = [
 	{
 		url: BetawiTenderloin,
 	},
+	{
+		url: BetawiTenderloin,
+	},
+	{
+		url: BetawiTenderloin,
+	},
 ];
-
-function getWindowDimensions() {
-	const { innerWidth: width, innerHeight: height } = window;
-	return {
-		width,
-		height,
-	};
-}
 
 const Ambience = () => {
 	const containerRef = useRef<HTMLDivElement>(null);
 
 	const { scrollYProgress } = useScroll({
 		target: containerRef,
-		offset: ["start end", "end center"],
+		offset: ["center center", "end end"],
 	});
 
-	const [windowDimensions, setWindowDimensions] = useState(
-		getWindowDimensions()
-	);
-
-	useEffect(() => {
-		function handleResize() {
-			setWindowDimensions(getWindowDimensions());
-		}
-
-		window.addEventListener("resize", handleResize);
-		return () => window.removeEventListener("resize", handleResize);
-	}, []);
-
-	console.log(windowDimensions);
-
 	return (
-		<div className='h-[300vh] pt-20 pb-[21rem] bg-gray-900 hidden lg:block'>
-			<h1 className='text-[4.5rem] text-white uppercase text-center mb-30'>
+		<div className='relative contain-paint py-18 hidden lg:block px-5'>
+			<Parallax
+				className='w-full h-full absolute top-0 left-0 contain-paint'
+				translateY={[-20, 20]}
+				speed={1}>
+				<img
+					className='absolute top-0 left-0 w-full h-full object-cover'
+					src={HeroImageTwo}
+				/>
+				<div className='absolute w-full h-full top-0 left-0 bg-black opacity-70'></div>
+			</Parallax>
+
+			<h1 className='relative text-[4.5rem] text-white uppercase text-center mb-30'>
 				Tribute to the product, genuine <br />
 				<span className='text-[#3674b5]'> tastes</span> .
 			</h1>
 
-			<div ref={containerRef} className='h-full contain-paint'>
+			<div ref={containerRef} className='h-[200vh] contain-paint'>
 				<div className='sticky top-20 w-full'>
 					<div
 						style={{ zIndex: signatureMenus.length + 1 }}
-						className='absolute w-[406px] h-[88vh] top-auto bottom-auto right-0 left-0 bg-white shadow-lg overflow-hidden rounded-lg'>
+						className='absolute w-[406px] h-[88vh] right-0 left-0 bg-white shadow-lg overflow-hidden rounded-sm'>
 						<img
 							className='w-full h-full object-cover'
 							src={BetawiTenderloin}
@@ -73,14 +69,14 @@ const Ambience = () => {
 						const x = useTransform(
 							scrollYProgress,
 							[0, 1],
-							[`${(index + 1) * 100}%`, `${index * 1}%`]
+							[`${(index + 1) * 100}%`, `${index * 20}%`]
 						);
 
 						return (
 							<motion.div
 								key={index}
 								style={{ x, zIndex: signatureMenus.length - index }}
-								className='absolute w-[406px] h-[88vh] top-0 left-0 bg-white shadow-lg overflow-hidden rounded-lg'>
+								className='absolute w-[406px] h-[88vh] top-0 left-0 bg-white shadow-lg overflow-hidden rounded-sm'>
 								<img
 									src={src.url}
 									alt={`Image ${index + 1}`}
@@ -95,21 +91,14 @@ const Ambience = () => {
 							x: useTransform(
 								scrollYProgress,
 								[0, 1],
-								[
-									`${signatureMenus.length * 100}%`,
-									`${signatureMenus.length / windowDimensions.width - 10}rem`,
-								]
+								[`${(signatureMenus.length + 1) * 100}%`, `0%`]
 							),
 							zIndex: signatureMenus.length + 1,
 						}}
-						className='absolute w-full h-[88vh] left-0 top-0 bg-white shadow-lg overflow-hidden rounded-lg p-6 flex items-center pl-14 text-black text-xl font-bold'>
-						<div className='w-[30%] flex flex-col gap-5 items-center justify-center'>
+						className='w-[35%] h-[88vh] ml-auto left-0 top-0 bg-white shadow-lg overflow-hidden rounded-sm p-6 flex items-center text-black text-xl font-bold'>
+						<div className='flex flex-col w-[80%] mx-auto gap-5 items-center justify-center'>
 							<AiFillBook className='text-5xl' />
-							<p
-								style={{
-									fontSize: `${windowDimensions.width / 1500}rem`,
-								}}
-								className='text-center'>
+							<p className='text-center text-sm'>
 								At Tastavents, the ingredient is king. Our menu presents a
 								selection of dishes that capture the essence of the
 								Mediterranean, with authentic and fresh flavors.

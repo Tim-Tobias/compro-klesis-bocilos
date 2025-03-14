@@ -13,6 +13,7 @@ const Home = () => {
 			<Signature />
 			<div className='w-full h-screen'></div>
 			<Ambience />
+			<div className='w-full h-screen'></div>
 		</>
 	);
 };

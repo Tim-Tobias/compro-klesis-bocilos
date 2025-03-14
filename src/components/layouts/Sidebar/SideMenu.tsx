@@ -56,7 +56,7 @@ const SideMenu = () => {
 				<div className='dark:text-slate-700'>
 					<p className='text-xl font-bold text-slate-700'>Navigation.</p>
 					<Separator />
-					<div className='pt-10 space-y-8 text-[45px] lg:text-[60px]'>
+					<div className='pt-10 space-y-8 text-[45px] lg:text-[38px]'>
 						{MENU_ITEMS.map(
 							(item, index) =>
 								item.isShow && (
