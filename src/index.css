@@ -1,0 +1,27 @@
+/** @format */
+
+@import "tailwindcss";
+
+@font-face {
+	font-family: Gauter;
+	src: url("Gauter.otf");
+}
+
+body {
+	scroll-behavior: "smooth";
+}
+
+.gauter {
+	font-family: Gauter, sans-serif;
+}
+
+h1,
+h2,
+h3 {
+	font-family: Gauter, sans-serif;
+}
+
+p,
+a {
+	font-family: "Lato", sans-serif;
+}
