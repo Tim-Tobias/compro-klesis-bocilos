@@ -61,6 +61,9 @@ const SideMenu = () => {
 							(item, index) =>
 								item.isShow && (
 									<div
+										data-aos='fade-left'
+										data-aos-duration='2000'
+										data-aos-delay={index * 300}
 										key={index}
 										className='cursor-pointer w-fit text-slate-700'
 										onClick={() => scrolltoSection(item.href)}>

@@ -13,7 +13,11 @@ const Logo = ({ classnames }: LogoProps) => {
 	const scrollY = useScrollPosition();
 
 	return (
-		<Link to='/' className={classnames}>
+		<Link
+			data-aos='fade-right'
+			data-aos-delay='500'
+			to='/'
+			className={classnames}>
 			<img
 				className='w-full h-full object-cover'
 				src={scrollY > 0 ? LogoHeaderBlack : LogoHeaderWhite}

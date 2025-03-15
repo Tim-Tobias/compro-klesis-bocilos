@@ -5,11 +5,11 @@ const Story = () => {
 	return (
 		<div className='w-full py-25 relative overflow-hidden'>
 			<div className='mx-auto max-w-[1028px] min-h-[400px] text-[#555555] px-5'>
-				<h1 className='text-6xl text-center'>
+				<h1 className='text-6xl text-center' data-aos='fade-right'>
 					The <span className='text-[#3674b5]'>Story</span>
 				</h1>
 
-				<p className='mt-10'>
+				<p className='mt-10' data-aos='fade-left' data-aos-delay='500'>
 					<span className='text-[70px] leading-none float-left font-semibold'>
 						N
 					</span>

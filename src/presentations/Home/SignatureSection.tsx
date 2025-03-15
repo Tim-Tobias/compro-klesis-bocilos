@@ -42,17 +42,34 @@ const Signature = () => {
 
 			<div className='text-white relative w-full h-full py-15'>
 				<div className='text-center'>
-					<div className='px-10 py-1 border w-fit mx-auto'>
+					<div
+						data-aos='fade-down'
+						data-aos-delay='300'
+						className='px-10 py-1 border w-fit mx-auto'>
 						<h1 className='text-4xl'>Klesis Signature</h1>
 					</div>
 
-					<div className='relative flex flex-col items-center  lg:flex-row w-full h-full justify-between max-w-[1028px] mx-auto mt-20 z-10'>
+					<div className='relative flex lg:hidden flex-col gap-10 items-center  lg:flex-row w-full h-full justify-between max-w-[1028px] mx-auto mt-20 z-10'>
+						{signatureMenus.map((item, index) => (
+							<div
+								data-aos='fade-down'
+								data-aos-delay='500'
+								className='relative w-full max-w-[300px] h-[350px] overflow-hidden hover:scale-105 transition-transform transition-1000 rounded-xl shadow-lg'>
+								<img src={item.url} className='w-full h-full object-cover ' />
+							</div>
+						))}
+					</div>
+
+					<div className='relative hidden lg:flex flex-col items-center  lg:flex-row w-full h-full justify-between max-w-[1028px] mx-auto mt-20 z-10'>
 						{signatureMenus.map((item, index) => (
 							<Parallax
 								key={index}
 								translateY={[item.from, item.to]}
 								speed={item.speed}>
-								<div className='relative w-full max-w-[300px] h-[350px] overflow-hidden hover:scale-105 transition-transform transition-1000 rounded-xl shadow-lg'>
+								<div
+									data-aos='fade-down'
+									data-aos-delay='500'
+									className='relative w-full max-w-[300px] h-[350px] overflow-hidden hover:scale-105 transition-transform transition-1000 rounded-xl shadow-lg'>
 									<img src={item.url} className='w-full h-full object-cover ' />
 								</div>
 							</Parallax>

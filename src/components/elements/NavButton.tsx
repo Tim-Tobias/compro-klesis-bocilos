@@ -12,7 +12,11 @@ const NavButton = ({ isBurgerClicked, setIsBurgerClicked }: NavButtonProps) => {
 	const scrollY = useScrollPosition();
 
 	return (
-		<div className='relative z-10' onClick={setIsBurgerClicked}>
+		<div
+			data-aos='fade-left'
+			data-aos-delay='500'
+			className='relative z-10'
+			onClick={setIsBurgerClicked}>
 			{isBurgerClicked ? (
 				<AiOutlineClose />
 			) : (

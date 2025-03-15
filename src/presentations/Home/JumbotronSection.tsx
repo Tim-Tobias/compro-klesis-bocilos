@@ -84,6 +84,8 @@ const Jumbotron = () => {
 								translateY={[-20, 20]}
 								speed={0.5}>
 								<img
+									data-aos='fade-in'
+									data-aos-delay='100'
 									className='absolute top-0 left-0 w-full h-full object-cover'
 									src={item.url}
 								/>

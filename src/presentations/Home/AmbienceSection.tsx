@@ -22,9 +22,6 @@ const signatureMenus = [
 	{
 		url: BetawiTenderloin,
 	},
-	{
-		url: BetawiTenderloin,
-	},
 ];
 
 const Ambience = () => {
@@ -32,13 +29,13 @@ const Ambience = () => {
 
 	const { scrollYProgress } = useScroll({
 		target: containerRef,
-		offset: ["center center", "end end"],
+		offset: ["start start", "end end"],
 	});
 
 	return (
-		<div className='relative contain-paint py-18 hidden lg:block px-5'>
+		<div className='relative h-[220vh] bg-black grid grid-cols-1 overflow-clip lg:h-auto pt-18 pb-10 px-5'>
 			<Parallax
-				className='w-full h-full absolute top-0 left-0 contain-paint'
+				className='w-full h-full absolute top-0 left-0'
 				translateY={[-20, 20]}
 				speed={1}>
 				<img
@@ -48,13 +45,54 @@ const Ambience = () => {
 				<div className='absolute w-full h-full top-0 left-0 bg-black opacity-70'></div>
 			</Parallax>
 
-			<h1 className='relative text-[4.5rem] text-white uppercase text-center mb-30'>
-				Tribute to the product, genuine <br />
-				<span className='text-[#3674b5]'> tastes</span> .
-			</h1>
+			<div>
+				<h1
+					data-aos='fade-down'
+					data-aos-delay='600'
+					className='relative text-[3rem] lg:text-[4.5rem] text-white h-fit uppercase text-center mb-10 lg:mb-30'>
+					Tribute to the product, genuine <br />
+					<span className='text-[#3674b5]'> tastes</span> .
+				</h1>
 
-			<div ref={containerRef} className='h-[200vh] contain-paint'>
-				<div className='sticky top-20 w-full'>
+				<div className='relative w-full lg:hidden px-5 text-white my-10'>
+					{signatureMenus.map((src, index) => {
+						return (
+							<motion.div
+								key={index}
+								style={{ y: index * 50 }}
+								className='absolute w-full max-w-[450px] shadow-2xl top-0 left-1/2 mx-auto overflow-hidden rounded-sm -translate-x-1/2'>
+								<img
+									data-aos='fade-left'
+									data-aos-delay={index * 500}
+									src={src.url}
+									alt={`Image ${index + 1}`}
+									className='w-full h-full object-cover'
+								/>
+							</motion.div>
+						);
+					})}
+				</div>
+			</div>
+
+			<div
+				data-aos='fade-left'
+				data-aos-delay='300'
+				className='text-white w-full h-fit self-end lg:hidden relative'>
+				<motion.div className='w-full max-w-[450px] mx-auto h-full left-0 top-0 bg-white shadow-lg overflow-hidden rounded-sm p-6 flex items-center text-black text-xl font-bold'>
+					<div className='flex flex-col gap-5 items-center justify-center'>
+						<AiFillBook className='text-5xl' />
+						<p className='text-center text-sm'>
+							At Tastavents, the ingredient is king. Our menu presents a
+							selection of dishes that capture the essence of the Mediterranean,
+							with authentic and fresh flavors.
+						</p>
+						dawdwadwadwadwadwa
+					</div>
+				</motion.div>
+			</div>
+
+			<div ref={containerRef} className='lg:h-[200vh] hidden lg:block'>
+				<div className='sticky top-20'>
 					<div
 						style={{ zIndex: signatureMenus.length + 1 }}
 						className='absolute w-[406px] h-[88vh] right-0 left-0 bg-white shadow-lg overflow-hidden rounded-sm'>
@@ -69,7 +107,7 @@ const Ambience = () => {
 						const x = useTransform(
 							scrollYProgress,
 							[0, 1],
-							[`${(index + 1) * 100}%`, `${index * 20}%`]
+							[`${(index + 1) * 100}%`, `${(index + 1) * 14}%`]
 						);
 
 						return (
@@ -95,7 +133,7 @@ const Ambience = () => {
 							),
 							zIndex: signatureMenus.length + 1,
 						}}
-						className='w-[35%] h-[88vh] ml-auto left-0 top-0 bg-white shadow-lg overflow-hidden rounded-sm p-6 flex items-center text-black text-xl font-bold'>
+						className='w-[40%] h-[88vh] ml-auto left-0 top-0 bg-white shadow-lg overflow-hidden rounded-sm p-6 flex items-center text-black text-xl font-bold'>
 						<div className='flex flex-col w-[80%] mx-auto gap-5 items-center justify-center'>
 							<AiFillBook className='text-5xl' />
 							<p className='text-center text-sm'>
