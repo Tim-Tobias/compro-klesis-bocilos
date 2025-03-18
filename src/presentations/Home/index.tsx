@@ -5,6 +5,7 @@ import Jumbotron from "./JumbotronSection";
 import Ambience from "./AmbienceSection";
 import Signature from "./SignatureSection";
 import Team from "./TeamSection";
+import Menu from "./MenuSection";
 
 const Home = () => {
 	return (
@@ -14,7 +15,7 @@ const Home = () => {
 			<Signature />
 			<Team />
 			<Ambience />
-			<div className='w-full h-screen'></div>
+			<Menu />
 		</>
 	);
 };

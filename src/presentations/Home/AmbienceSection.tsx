@@ -8,6 +8,7 @@ import { AiFillBook } from "react-icons/ai";
 import { useRef } from "react";
 import HeroImageTwo from "../../assets/home/home-2.jpg";
 import { Parallax } from "react-scroll-parallax";
+import Button from "../../components/elements/Button";
 
 const signatureMenus = [
 	{
@@ -78,15 +79,16 @@ const Ambience = () => {
 				data-aos='fade-left'
 				data-aos-delay='300'
 				className='text-white w-full h-fit self-end lg:hidden relative'>
-				<motion.div className='w-full max-w-[450px] mx-auto h-full left-0 top-0 bg-white shadow-lg overflow-hidden rounded-sm p-6 flex items-center text-black text-xl font-bold'>
+				<motion.div className='w-full max-w-[450px] mx-auto h-full left-0 top-0 bg-white shadow-lg overflow-hidden rounded-sm p-6 flex items-center text-black '>
 					<div className='flex flex-col gap-5 items-center justify-center'>
 						<AiFillBook className='text-5xl' />
-						<p className='text-center text-sm'>
+						<p className='text-center text-sm font-bold'>
 							At Tastavents, the ingredient is king. Our menu presents a
 							selection of dishes that capture the essence of the Mediterranean,
 							with authentic and fresh flavors.
 						</p>
-						dawdwadwadwadwadwa
+
+						<a href="#" className='border py-1 px-5 rounded-sm'>Download Menu</a>
 					</div>
 				</motion.div>
 			</div>

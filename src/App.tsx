@@ -9,6 +9,7 @@ import "aos/dist/aos.css";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import LogoHitam from "./assets/logo/LOGO.png";
+import FooterLayout from "./components/layouts/Footer";
 
 const App = () => {
 	const [loading, setLoading] = useState(true);
@@ -57,7 +58,9 @@ const App = () => {
 					<BrowserRouter>
 						<Routes>
 							<Route path='/' element={<HeaderLayout />}>
-								<Route path='/' element={<Home />} />
+								<Route path='/' element={<FooterLayout />}>
+									<Route path='/' element={<Home />} />
+								</Route>
 							</Route>
 						</Routes>
 					</BrowserRouter>
