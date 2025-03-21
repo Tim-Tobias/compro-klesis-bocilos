@@ -6,8 +6,15 @@ import { useMenu } from "../../../store/menu";
 import MagneticProvider from "../../../providers/MagneticProvider";
 import { MENU_ITEMS } from "../../../common/constant";
 import Separator from "../../elements/Separator";
+import { AiOutlineClose } from "react-icons/ai";
 
-const SideMenu = () => {
+interface SideMenuProps {
+	closeMenu: () => void;
+}
+
+const SideMenu = (props: SideMenuProps) => {
+	const { closeMenu } = props;
+
 	const { hideMenu } = useMenu();
 
 	const handleClose = () => {
@@ -71,6 +78,10 @@ const SideMenu = () => {
 									</div>
 								)
 						)}
+					</div>
+
+					<div className='absolute top-5 right-5 text-3xl'>
+						<AiOutlineClose onClick={closeMenu} />
 					</div>
 				</div>
 			</motion.div>

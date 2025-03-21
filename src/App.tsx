@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import LogoHitam from "./assets/logo/LOGO.png";
 import FooterLayout from "./components/layouts/Footer";
+import "@react-pdf-viewer/core/lib/styles/index.css";
 
 const App = () => {
 	const [loading, setLoading] = useState(true);

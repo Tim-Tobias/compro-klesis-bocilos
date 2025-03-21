@@ -15,11 +15,9 @@ const NavButton = ({ isBurgerClicked, setIsBurgerClicked }: NavButtonProps) => {
 		<div
 			data-aos='fade-left'
 			data-aos-delay='500'
-			className='relative z-10'
+			className='relative'
 			onClick={setIsBurgerClicked}>
-			{isBurgerClicked ? (
-				<AiOutlineClose />
-			) : (
+			{!isBurgerClicked && (
 				<AiOutlineMenu className={scrollY > 0 ? "text-black" : "text-white"} />
 			)}
 		</div>

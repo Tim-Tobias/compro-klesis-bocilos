@@ -26,7 +26,7 @@ const Nav = () => {
 			<NavButton isBurgerClicked={isOpen} setIsBurgerClicked={toggleMenu} />
 
 			<AnimatePresence mode='wait' initial={false}>
-				{isOpen && <SideMenu />}
+				{isOpen && <SideMenu closeMenu={toggleMenu} />}
 			</AnimatePresence>
 		</div>
 	);

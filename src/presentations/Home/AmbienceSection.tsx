@@ -8,7 +8,7 @@ import { AiFillBook } from "react-icons/ai";
 import { useRef } from "react";
 import HeroImageTwo from "../../assets/home/home-2.jpg";
 import { Parallax } from "react-scroll-parallax";
-import Button from "../../components/elements/Button";
+import { Worker, Viewer } from "@react-pdf-viewer/core";
 
 const signatureMenus = [
 	{
@@ -16,6 +16,9 @@ const signatureMenus = [
 	},
 	{
 		url: DasanaSalad,
+	},
+	{
+		url: BetawiTenderloin,
 	},
 	{
 		url: BetawiTenderloin,
@@ -79,17 +82,12 @@ const Ambience = () => {
 				data-aos='fade-left'
 				data-aos-delay='300'
 				className='text-white w-full h-fit self-end lg:hidden relative'>
-				<motion.div className='w-full max-w-[450px] mx-auto h-full left-0 top-0 bg-white shadow-lg overflow-hidden rounded-sm p-6 flex items-center text-black '>
-					<div className='flex flex-col gap-5 items-center justify-center'>
-						<AiFillBook className='text-5xl' />
-						<p className='text-center text-sm font-bold'>
-							At Tastavents, the ingredient is king. Our menu presents a
-							selection of dishes that capture the essence of the Mediterranean,
-							with authentic and fresh flavors.
-						</p>
-
-						<a href="#" className='border py-1 px-5 rounded-sm'>Download Menu</a>
-					</div>
+				<motion.div className='relative w-full max-w-[450px] mx-auto h-[300px] bg-white shadow-lg rounded-sm flex items-center text-black '>
+					<Worker workerUrl='https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js'>
+						<div className='w-full h-full'>
+							<Viewer fileUrl='/1. Formulir Permohonan EFIN.pdf' />
+						</div>
+					</Worker>
 				</motion.div>
 			</div>
 
@@ -135,14 +133,13 @@ const Ambience = () => {
 							),
 							zIndex: signatureMenus.length + 1,
 						}}
-						className='w-[40%] h-[88vh] ml-auto left-0 top-0 bg-white shadow-lg overflow-hidden rounded-sm p-6 flex items-center text-black text-xl font-bold'>
-						<div className='flex flex-col w-[80%] mx-auto gap-5 items-center justify-center'>
-							<AiFillBook className='text-5xl' />
-							<p className='text-center text-sm'>
-								At Tastavents, the ingredient is king. Our menu presents a
-								selection of dishes that capture the essence of the
-								Mediterranean, with authentic and fresh flavors.
-							</p>
+						className='relative w-[40%] h-[88vh] ml-auto left-0 top-0 bg-white shadow-lg rounded-sm flex items-center text-black text-xl font-bold'>
+						<div className='w-full h-full'>
+							<Worker workerUrl='https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js'>
+								<div className='w-full h-full'>
+									<Viewer fileUrl='/1. Formulir Permohonan EFIN.pdf' />
+								</div>
+							</Worker>
 						</div>
 					</motion.div>
 				</div>
