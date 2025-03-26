@@ -9,6 +9,7 @@ import { useRef } from "react";
 import HeroImageTwo from "../../assets/home/home-2.jpg";
 import { Parallax } from "react-scroll-parallax";
 import { Worker, Viewer } from "@react-pdf-viewer/core";
+import "@react-pdf-viewer/core/lib/styles/index.css";
 
 const signatureMenus = [
 	{
@@ -37,7 +38,7 @@ const Ambience = () => {
 	});
 
 	return (
-		<div className='relative h-[220vh] bg-black grid grid-cols-1 overflow-clip lg:h-auto pt-18 pb-10 px-5'>
+		<div className='relative bg-black grid grid-cols-1 overflow-clip lg:h-auto pt-18 pb-10 px-5'>
 			<Parallax
 				className='w-full h-full absolute top-0 left-0'
 				translateY={[-20, 20]}
@@ -49,7 +50,7 @@ const Ambience = () => {
 				<div className='absolute w-full h-full top-0 left-0 bg-black opacity-70'></div>
 			</Parallax>
 
-			<div>
+			<div className='h-[1000px] lg:h-auto'>
 				<h1
 					data-aos='fade-down'
 					data-aos-delay='600'
@@ -82,10 +83,10 @@ const Ambience = () => {
 				data-aos='fade-left'
 				data-aos-delay='300'
 				className='text-white w-full h-fit self-end lg:hidden relative'>
-				<motion.div className='relative w-full max-w-[450px] mx-auto h-[300px] bg-white shadow-lg rounded-sm flex items-center text-black '>
+				<motion.div className='relative w-full max-w-[450px] mx-auto h-[600px] bg-white shadow-lg rounded-sm flex items-center text-black '>
 					<Worker workerUrl='https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js'>
 						<div className='w-full h-full'>
-							<Viewer fileUrl='/1. Formulir Permohonan EFIN.pdf' />
+							<Viewer fileUrl='menu-small.pdf' />
 						</div>
 					</Worker>
 				</motion.div>
@@ -137,7 +138,7 @@ const Ambience = () => {
 						<div className='w-full h-full'>
 							<Worker workerUrl='https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js'>
 								<div className='w-full h-full'>
-									<Viewer fileUrl='/1. Formulir Permohonan EFIN.pdf' />
+									<Viewer fileUrl='menu-small.pdf' />
 								</div>
 							</Worker>
 						</div>
