@@ -24,9 +24,6 @@ const signatureMenus = [
 	{
 		url: BetawiTenderloin,
 	},
-	{
-		url: BetawiTenderloin,
-	},
 ];
 
 const Ambience = () => {
@@ -93,37 +90,39 @@ const Ambience = () => {
 			</div>
 
 			<div ref={containerRef} className='lg:h-[200vh] hidden lg:block'>
-				<div className='sticky top-20'>
-					<div
-						style={{ zIndex: signatureMenus.length + 1 }}
-						className='absolute w-[406px] h-[88vh] right-0 left-0 bg-white shadow-lg overflow-hidden rounded-sm'>
-						<img
-							className='w-full h-full object-cover'
-							src={BetawiTenderloin}
-							alt=''
-						/>
+				<div className='sticky top-20 grid grid-cols-2 gap-5 h-screen'>
+					<div className='w-full relative'>
+						<div
+							style={{ zIndex: signatureMenus.length + 1 }}
+							className='absolute lg:w-[406px] h-full right-0 left-0 bg-white shadow-lg overflow-hidden rounded-sm'>
+							<img
+								className='w-full h-full object-cover'
+								src={BetawiTenderloin}
+								alt=''
+							/>
+						</div>
+
+						{signatureMenus.map((src, index) => {
+							const x = useTransform(
+								scrollYProgress,
+								[0, 1],
+								[`${(index + 1) * 100}%`, `${(index + 1) * 14}%`]
+							);
+
+							return (
+								<motion.div
+									key={index}
+									style={{ x, zIndex: signatureMenus.length - index }}
+									className='absolute lg:w-[406px] h-full top-0 left-0 bg-white shadow-lg overflow-hidden rounded-sm'>
+									<img
+										src={src.url}
+										alt={`Image ${index + 1}`}
+										className='w-full h-full object-cover'
+									/>
+								</motion.div>
+							);
+						})}
 					</div>
-
-					{signatureMenus.map((src, index) => {
-						const x = useTransform(
-							scrollYProgress,
-							[0, 1],
-							[`${(index + 1) * 100}%`, `${(index + 1) * 14}%`]
-						);
-
-						return (
-							<motion.div
-								key={index}
-								style={{ x, zIndex: signatureMenus.length - index }}
-								className='absolute w-[406px] h-[88vh] top-0 left-0 bg-white shadow-lg overflow-hidden rounded-sm'>
-								<img
-									src={src.url}
-									alt={`Image ${index + 1}`}
-									className='w-full h-full object-cover'
-								/>
-							</motion.div>
-						);
-					})}
 
 					<motion.div
 						style={{
@@ -134,14 +133,12 @@ const Ambience = () => {
 							),
 							zIndex: signatureMenus.length + 1,
 						}}
-						className='relative w-[40%] h-[88vh] ml-auto left-0 top-0 bg-white shadow-lg rounded-sm flex items-center text-black text-xl font-bold'>
-						<div className='w-full h-full'>
-							<Worker workerUrl='https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js'>
-								<div className='w-full h-full'>
-									<Viewer fileUrl='menu-small.pdf' />
-								</div>
-							</Worker>
-						</div>
+						className='relative w-full h-screen ml-auto left-0 top-0 shadow-lg rounded-sm flex items-center text-black text-xl font-bold'>
+						<Worker workerUrl='https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js'>
+							<div className='w-full h-full'>
+								<Viewer fileUrl='menu-small.pdf' />
+							</div>
+						</Worker>
 					</motion.div>
 				</div>
 			</div>

@@ -13,56 +13,66 @@ import "swiper/css/effect-fade";
 import { useState } from "react";
 import Button from "../../components/elements/Button";
 
-const ImageSlider = [
-	{
-		url: HeroImageOne,
-		component: (
-			<motion.h1
-				initial={{ opacity: 0, y: -50 }}
-				animate={{ opacity: 1, y: 0 }}
-				exit={{ opacity: 0, x: -50 }}
-				transition={{ duration: 0.5 }}
-				className='text-[6rem] tracking-tight leading-20'>
-				Welcome Home
-			</motion.h1>
-		),
-	},
-	{
-		url: HeroImageTwo,
-		component: (
-			<div>
+const Jumbotron = () => {
+	const [activeIndex, setActiveIndex] = useState(0);
+
+	const scrolltoSection = function (element_id: string) {
+		console.log("check");
+		const element = document.querySelector(element_id);
+		element?.scrollIntoView({
+			behavior: "smooth",
+			block: "start",
+			inline: "nearest",
+		});
+	};
+
+	const ImageSlider = [
+		{
+			url: HeroImageOne,
+			component: (
 				<motion.h1
 					initial={{ opacity: 0, y: -50 }}
 					animate={{ opacity: 1, y: 0 }}
 					exit={{ opacity: 0, x: -50 }}
 					transition={{ duration: 0.5 }}
-					className='text-[4rem] lg:text-[6rem] tracking-tight leading-20 mb-10'>
-					Welcome To <br /> Klesis Bocilos
+					className='text-[6rem] tracking-tight leading-20'>
+					Welcome Home
 				</motion.h1>
+			),
+		},
+		{
+			url: HeroImageTwo,
+			component: (
+				<div>
+					<motion.h1
+						initial={{ opacity: 0, y: -50 }}
+						animate={{ opacity: 1, y: 0 }}
+						exit={{ opacity: 0, x: -50 }}
+						transition={{ duration: 0.5 }}
+						className='text-[4rem] lg:text-[6rem] tracking-tight leading-20 mb-10'>
+						Welcome To <br /> Klesis Bocilos
+					</motion.h1>
 
-				<motion.div
-					initial={{ opacity: 0, y: 50 }}
-					animate={{ opacity: 1, y: 0 }}
-					exit={{ opacity: 0, x: -50 }}
-					transition={{ duration: 0.5, delay: 0.3 }}>
-					<Button
-						as='a'
-						href='#'
-						className='text-sm uppercase hover:bg-[#3674b5] hover:border-[#3674b5]'>
-						Today's Story
-					</Button>
-				</motion.div>
-			</div>
-		),
-	},
-	{
-		url: HeroImageThree,
-		component: null,
-	},
-];
-
-const Jumbotron = () => {
-	const [activeIndex, setActiveIndex] = useState(0);
+					<motion.div
+						initial={{ opacity: 0, y: 50 }}
+						animate={{ opacity: 1, y: 0 }}
+						exit={{ opacity: 0, x: -50 }}
+						transition={{ duration: 0.5, delay: 0.3 }}>
+						<Button
+							as='button'
+							onClick={() => scrolltoSection("#about")}
+							className='text-sm uppercase cursor-pointer z-30 hover:bg-[#3674b5] hover:border-[#3674b5]'>
+							Today's Story
+						</Button>
+					</motion.div>
+				</div>
+			),
+		},
+		{
+			url: HeroImageThree,
+			component: null,
+		},
+	];
 
 	return (
 		<div className='overflow-hidden relative'>

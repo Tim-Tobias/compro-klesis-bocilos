@@ -3,7 +3,7 @@ import BgAbout from "../../assets/about/home_three_about_bg.png";
 
 const Story = () => {
 	return (
-		<div className='w-full py-25 relative overflow-hidden'>
+		<div id='about' className='w-full py-25 relative overflow-hidden'>
 			<div className='mx-auto max-w-[1028px] min-h-[400px] text-[#555555] px-5'>
 				<h1 className='text-6xl text-center' data-aos='fade-right'>
 					The <span className='text-[#3674b5]'>Story</span>

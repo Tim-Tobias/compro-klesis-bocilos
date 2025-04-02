@@ -19,6 +19,7 @@ const Team = () => {
 				<div className='flex w-full justify-center items-center'>
 					{chefs.map((item, index) => (
 						<img
+							key={index}
 							data-aos='fade-down'
 							data-aos-delay={index * 600}
 							className='w-[80px] transition-all lg:w-[150px] h-[250px] lg:h-[450px] object-cover hover:scale-105'

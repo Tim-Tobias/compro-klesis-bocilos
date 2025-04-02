@@ -61,7 +61,7 @@ const SideMenu = (props: SideMenuProps) => {
 				}}
 				className='pointer-events-auto absolute right-0 top-0 flex min-h-screen w-full max-w-lg flex-col justify-between pb-12 pt-[clamp(3.5rem,10vh,5rem)] text-6xl text-white will-change-transform [-webkit-perspective:1000] px-5 lg:px-10 bg-white'>
 				<div className='dark:text-slate-700'>
-					<p className='text-xl font-bold text-slate-700'>Navigation.</p>
+					<p className='text-xl font-bold text-slate-700'>Our Menu.</p>
 					<Separator />
 					<div className='pt-10 space-y-8 text-[45px] lg:text-[38px]'>
 						{MENU_ITEMS.map(

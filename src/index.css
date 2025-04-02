@@ -7,8 +7,8 @@
 	src: url("Gauter.otf");
 }
 
-body {
-	scroll-behavior: "smooth";
+* {
+	scroll-behavior: smooth;
 }
 
 .gauter {
