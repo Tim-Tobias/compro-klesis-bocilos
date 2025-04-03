@@ -1,6 +1,5 @@
 /** @format */
 import { AiOutlineMenu } from "react-icons/ai";
-import { AiOutlineClose } from "react-icons/ai";
 import useScrollPosition from "../../hooks/useScrollPosition";
 
 interface NavButtonProps {

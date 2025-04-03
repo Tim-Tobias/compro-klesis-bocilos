@@ -4,7 +4,6 @@ import BeefRendang from "../../assets/menu/signature/beef-rendang.jpg";
 import DasanaSalad from "../../assets/menu/signature/dasana-salad.jpg";
 import BetawiTenderloin from "../../assets/menu/signature/soto-betawi-tenderloin.jpg";
 import { useScroll, useTransform, motion } from "framer-motion";
-import { AiFillBook } from "react-icons/ai";
 import { useRef } from "react";
 import HeroImageTwo from "../../assets/home/home-2.jpg";
 import { Parallax } from "react-scroll-parallax";
