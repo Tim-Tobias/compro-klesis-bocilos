@@ -13,7 +13,8 @@ const Home = () => {
 			<Jumbotron />
 			<Story />
 			<Signature />
-			<Team />
+			<div className='py-5'></div>
+			{/* <Team /> */}
 			<Ambience />
 			<Menu />
 		</>
