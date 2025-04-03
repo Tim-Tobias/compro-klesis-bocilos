@@ -87,7 +87,7 @@ const Signature = () => {
 						))}
 					</div>
 
-					<div className='relative hidden lg:flex flex-col items-center  lg:flex-row w-full h-full justify-between max-w-[1028px] mx-auto mt-20 z-10'>
+					<div className='relative hidden lg:flex flex-col items-center gap-5 lg:flex-row w-full h-full justify-between max-w-[1028px] mx-auto mt-20 z-10'>
 						{signatureMenus.map((item, index) => (
 							<Parallax
 								key={index}
