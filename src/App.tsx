@@ -11,10 +11,13 @@ import { motion } from "framer-motion";
 import LogoHitam from "./assets/logo/LOGO.png";
 import FooterLayout from "./components/layouts/Footer";
 import "@react-pdf-viewer/core/lib/styles/index.css";
+import { ImageItem } from "./model/Image";
+import axios from "./services/axios-client";
 
 const App = () => {
 	const [loading, setLoading] = useState(true);
 	const [progress, setProgress] = useState(0);
+	const [images, setImages] = useState<ImageItem[]>([]);
 
 	useEffect(() => {
 		const interval = setInterval(() => {
@@ -33,6 +36,20 @@ const App = () => {
 		}, 2500);
 
 		return () => clearInterval(interval);
+	}, []);
+
+	useEffect(() => {
+		const fetchHomeSection = async () => {
+			try {
+				const res = await axios.get("/home-section");
+				const data = res.data.images;
+				setImages(data);
+			} catch (error) {
+				console.log(error);
+			}
+		};
+
+		fetchHomeSection();
 	}, []);
 
 	return (
@@ -60,7 +77,7 @@ const App = () => {
 						<Routes>
 							<Route path='/' element={<HeaderLayout />}>
 								<Route path='/' element={<FooterLayout />}>
-									<Route path='/' element={<Home />} />
+									<Route path='/' element={<Home images={images} />} />
 								</Route>
 							</Route>
 						</Routes>

@@ -6,35 +6,15 @@
 
 import { useEffect, useState } from "react";
 import HeroImageTwo from "../../assets/home/home-2.jpg";
-import BeefRendang from "../../assets/menu/signature/beef-rendang.jpg";
-import DasanaSalad from "../../assets/menu/signature/dasana-salad.jpg";
-import BetawiTenderloin from "../../assets/menu/signature/soto-betawi-tenderloin.jpg";
 import { Parallax } from "react-scroll-parallax";
 import ParallaxText from "../../components/elements/ParallaxText";
-
-const signatureMenus = [
-	{
-		url: BeefRendang,
-		from: 50,
-		to: 0,
-		speed: 0.5,
-	},
-	{
-		url: DasanaSalad,
-		from: 150,
-		to: 0,
-		speed: 0.5,
-	},
-	{
-		url: BetawiTenderloin,
-		from: 250,
-		to: 0,
-		speed: 0.1,
-	},
-];
+import axios from "../../services/axios-client";
+import { ImageItem } from "../../model/Image";
 
 const Signature = () => {
 	const [selectedItem, setSelectedItem] = useState<any | null>(null);
+	const [images, setImages] = useState<ImageItem[]>([]);
+	const [background, setBackground] = useState<ImageItem>();
 
 	useEffect(() => {
 		if (selectedItem) {
@@ -44,6 +24,23 @@ const Signature = () => {
 		}
 	}, [selectedItem]);
 
+	useEffect(() => {
+		const fetchHomeSection = async () => {
+			try {
+				const res = await axios.get("/signature-section");
+				const data = res.data.images;
+				const bg = res.data.background;
+
+				setImages(data);
+				setBackground(bg);
+			} catch (error) {
+				console.log(error);
+			}
+		};
+
+		fetchHomeSection();
+	}, []);
+
 	return (
 		<div className='w-full h-full lg:h-[130vh] px-5 py-10 relative overflow-hidden'>
 			<Parallax
@@ -51,8 +48,9 @@ const Signature = () => {
 				translateY={[-20, 20]}
 				speed={1}>
 				<img
+					alt={background?.description}
 					className='absolute top-0 left-0 w-full h-full object-cover'
-					src={HeroImageTwo}
+					src={background?.file_path}
 				/>
 				<div className='absolute w-full h-full top-0 left-0 bg-black opacity-70'></div>
 			</Parallax>
@@ -76,29 +74,35 @@ const Signature = () => {
 					</div>
 
 					<div className='relative flex lg:hidden flex-col gap-10 items-center  lg:flex-row w-full h-full justify-between max-w-[1028px] mx-auto mt-20 z-10'>
-						{signatureMenus.map((item, index) => (
+						{images.map((item, index) => (
 							<div
 								key={index}
 								data-aos='fade-down'
 								data-aos-delay='500'
 								className='relative w-full max-w-[300px] h-[350px] overflow-hidden hover:scale-105 transition-transform transition-1000 rounded-xl shadow-lg'>
-								<img src={item.url} className='w-full h-full object-cover ' />
+								<img
+									src={item.file_path}
+									className='w-full h-full object-cover '
+								/>
 							</div>
 						))}
 					</div>
 
 					<div className='relative hidden lg:flex flex-col items-center gap-10 lg:flex-row w-full h-full justify-between max-w-[1028px] mx-auto mt-20 z-10'>
-						{signatureMenus.map((item, index) => (
+						{images.map((item, index) => (
 							<Parallax
 								key={index}
-								translateY={[item.from, item.to]}
-								speed={item.speed}>
+								translateY={[50 + index * 100, 0]}
+								speed={0.5}>
 								<div
 									onClick={() => setSelectedItem(item)}
 									data-aos='fade-down'
 									data-aos-delay='500'
 									className='relative w-full max-w-[500] h-[350px] overflow-hidden hover:scale-105 transition-transform transition-1000 rounded-xl shadow-lg'>
-									<img src={item.url} className='w-full h-full object-cover ' />
+									<img
+										src={item.file_path}
+										className='w-full h-full object-cover '
+									/>
 								</div>
 							</Parallax>
 						))}
