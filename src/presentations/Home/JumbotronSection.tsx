@@ -48,6 +48,7 @@ const Jumbotron = ({ images }: { images: ImageItem[] }) => {
 									data-aos-delay='100'
 									className='absolute top-0 left-0 w-full h-full object-cover'
 									src={item.file_path}
+									alt={item.description}
 								/>
 								<div className='absolute w-full h-full top-0 left-0 bg-black opacity-50'></div>
 							</Parallax>

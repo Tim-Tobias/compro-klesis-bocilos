@@ -19,4 +19,5 @@ export interface ImageItem {
 	active: boolean | 0 | 1;
 	created_at: string;
 	updated_at: string;
+	highlight: boolean | 0 | 1;
 }

@@ -5,7 +5,6 @@
  */
 
 import { useEffect, useState } from "react";
-import HeroImageTwo from "../../assets/home/home-2.jpg";
 import { Parallax } from "react-scroll-parallax";
 import ParallaxText from "../../components/elements/ParallaxText";
 import axios from "../../services/axios-client";
@@ -82,6 +81,7 @@ const Signature = () => {
 								className='relative w-full max-w-[300px] h-[350px] overflow-hidden hover:scale-105 transition-transform transition-1000 rounded-xl shadow-lg'>
 								<img
 									src={item.file_path}
+									alt={item.description}
 									className='w-full h-full object-cover '
 								/>
 							</div>
@@ -101,6 +101,7 @@ const Signature = () => {
 									className='relative w-full max-w-[500] h-[350px] overflow-hidden hover:scale-105 transition-transform transition-1000 rounded-xl shadow-lg'>
 									<img
 										src={item.file_path}
+										alt={item.description}
 										className='w-full h-full object-cover '
 									/>
 								</div>
@@ -116,7 +117,11 @@ const Signature = () => {
 						onClick={() => setSelectedItem(null)}
 						className='bg-black opacity-90 absolute top-0 left-0 w-full h-full'></div>
 					<div className='bg-white p-5 rounded-md shadow-lg max-w-[500px] w-full relative'>
-						<img src={selectedItem.url} className='w-full h-auto rounded-md' />
+						<img
+							src={selectedItem.file_path}
+							alt={selectedItem.description}
+							className='w-full h-auto rounded-md'
+						/>
 					</div>
 				</div>
 			)}

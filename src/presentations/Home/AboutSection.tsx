@@ -36,12 +36,14 @@ const Story = () => {
 					The <span className='text-[#3674b5]'>Story</span>
 				</h1>
 
-				<div
-					className='mt-10'
-					data-aos='fade-left'
-					data-aos-delay='500'
-					dangerouslySetInnerHTML={{ __html: String(content?.content) }}
-				/>
+				{content && (
+					<div
+						className='mt-10'
+						data-aos='fade-left'
+						data-aos-delay='500'
+						dangerouslySetInnerHTML={{ __html: String(content?.content) }}
+					/>
+				)}
 			</div>
 			<img
 				src={background?.file_path}

@@ -1,14 +1,12 @@
 /** @format */
 
 import Jumbotron from "./JumbotronSection";
-import Ambience from "./AmbienceSection";
-import Signature from "./SignatureSection";
-// import Team from "./TeamSection";
-import Menu from "./MenuSection";
+import Team from "./TeamSection";
 import { ImageItem } from "../../model/Image";
-import { lazy } from "react";
-
-const Story = lazy(() => import("./AboutSection"));
+import Story from "./AboutSection";
+import Signature from "./SignatureSection";
+import Ambience from "./AmbienceSection";
+import Menu from "./MenuSection";
 
 const Home = ({ images }: { images: ImageItem[] }) => {
 	return (
@@ -16,8 +14,7 @@ const Home = ({ images }: { images: ImageItem[] }) => {
 			<Jumbotron images={images} />
 			<Story />
 			<Signature />
-			<div className='py-5'></div>
-			{/* <Team /> */}
+			<Team />
 			<Ambience />
 			<Menu />
 		</>
