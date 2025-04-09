@@ -31,7 +31,7 @@ const Team = () => {
 				data-aos='fade-down'
 				data-aos-delay='600'
 				className='text-6xl text-center'>
-				The <span className='text-[#3674b5]'>Team</span>
+				Meet Our <span className='text-[#3674b5]'>Chef</span>
 			</h1>
 
 			<div className='grid grid-cols-1 lg:grid-cols-2 justify-center items-start mt-10'>

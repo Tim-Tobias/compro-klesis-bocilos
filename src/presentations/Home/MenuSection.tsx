@@ -56,7 +56,7 @@ const Menu = () => {
 	return (
 		<div className='text-center space-y-5 py-32'>
 			<h1 className='text-6xl text-center' data-aos='fade-right'>
-				Today's <span className='text-[#3674b5]'>Menu</span>
+				Klesis <span className='text-[#3674b5]'>News</span>
 			</h1>
 
 			<CategoryFilter

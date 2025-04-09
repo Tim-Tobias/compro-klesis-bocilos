@@ -78,7 +78,7 @@ const Signature = () => {
 								key={index}
 								data-aos='fade-down'
 								data-aos-delay='500'
-								className='relative w-full max-w-[300px] h-[350px] overflow-hidden hover:scale-105 transition-transform transition-1000 rounded-xl shadow-lg'>
+								className='relative w-full max-w-[300px] h-[650px] overflow-hidden hover:scale-105 transition-transform transition-1000 rounded-xl shadow-lg'>
 								<img
 									src={item.file_path}
 									alt={item.description}
@@ -98,7 +98,7 @@ const Signature = () => {
 									onClick={() => setSelectedItem(item)}
 									data-aos='fade-down'
 									data-aos-delay='500'
-									className='relative w-full max-w-[500] h-[350px] overflow-hidden hover:scale-105 transition-transform transition-1000 rounded-xl shadow-lg'>
+									className='relative w-full max-w-[500] h-[500px] overflow-hidden hover:scale-105 transition-transform transition-1000 rounded-xl shadow-lg'>
 									<img
 										src={item.file_path}
 										alt={item.description}

@@ -1,9 +1,9 @@
 /** @format */
 import { Parallax } from "react-scroll-parallax";
-import HeroImageTwo from "../../assets/home/home-2.jpg";
+// import HeroImageTwo from "../../assets/home/home-2.jpg";
 import { Outlet } from "react-router-dom";
 import axios from "../../services/axios-client";
-import { FaInstagram, FaTwitter } from "react-icons/fa";
+import { FaInstagram, FaWhatsapp } from "react-icons/fa";
 import SocialIcon from "../elements/SocialIcon";
 import { useEffect, useState } from "react";
 import { ContentItem } from "../../model/Content";
@@ -12,13 +12,13 @@ import { ImageItem } from "../../model/Image";
 const links = [
 	{
 		name: "instagram",
-		url: "#",
+		url: "https://www.instagram.com/klesisbocilos/",
 		icon: <FaInstagram size={20} />,
 	},
 	{
-		name: "Twitter",
-		url: "#",
-		icon: <FaTwitter size={20} />,
+		name: "whatsapp",
+		url: "https://wa.me/+6281381689999",
+		icon: <FaWhatsapp size={20} />,
 	},
 ];
 
