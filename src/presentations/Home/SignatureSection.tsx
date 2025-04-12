@@ -7,13 +7,12 @@
 import { useEffect, useState } from "react";
 import { Parallax } from "react-scroll-parallax";
 import ParallaxText from "../../components/elements/ParallaxText";
-import axios from "../../services/axios-client";
-import { ImageItem } from "../../model/Image";
+import { useSignatureStore } from "../../store/signature";
+import { AnimatePresence, motion } from "framer-motion";
 
 const Signature = () => {
 	const [selectedItem, setSelectedItem] = useState<any | null>(null);
-	const [images, setImages] = useState<ImageItem[]>([]);
-	const [background, setBackground] = useState<ImageItem>();
+	const { background, images } = useSignatureStore();
 
 	useEffect(() => {
 		if (selectedItem) {
@@ -23,25 +22,8 @@ const Signature = () => {
 		}
 	}, [selectedItem]);
 
-	useEffect(() => {
-		const fetchHomeSection = async () => {
-			try {
-				const res = await axios.get("/signature-section");
-				const data = res.data.images;
-				const bg = res.data.background;
-
-				setImages(data);
-				setBackground(bg);
-			} catch (error) {
-				console.log(error);
-			}
-		};
-
-		fetchHomeSection();
-	}, []);
-
 	return (
-		<div className='w-full h-full lg:h-[130vh] px-5 py-10 relative overflow-hidden'>
+		<div id="signature" className='w-full h-full lg:h-[130vh] px-5 py-10 relative overflow-hidden'>
 			<Parallax
 				className='w-full h-full absolute top-0 left-0'
 				translateY={[-20, 20]}
@@ -111,20 +93,26 @@ const Signature = () => {
 				</div>
 			</div>
 
-			{selectedItem && (
-				<div className='fixed inset-0 flex items-center justify-center z-50'>
-					<div
-						onClick={() => setSelectedItem(null)}
-						className='bg-black opacity-90 absolute top-0 left-0 w-full h-full'></div>
-					<div className='bg-white p-5 rounded-md shadow-lg max-w-[500px] w-full relative'>
-						<img
-							src={selectedItem.file_path}
-							alt={selectedItem.description}
-							className='w-full h-auto rounded-md'
-						/>
-					</div>
-				</div>
-			)}
+			<AnimatePresence>
+				{selectedItem && (
+					<motion.div
+						initial={{ opacity: 0 }}
+						animate={{ opacity: 1 }}
+						exit={{ opacity: 0 }}
+						className='fixed inset-0 flex items-center justify-center z-50'>
+						<div
+							onClick={() => setSelectedItem(null)}
+							className='bg-black opacity-90 absolute top-0 left-0 w-full h-full'></div>
+						<div className='bg-white p-5 rounded-md shadow-lg max-w-[500px] w-full relative'>
+							<img
+								src={selectedItem.file_path}
+								alt={selectedItem.description}
+								className='w-full h-auto rounded-md'
+							/>
+						</div>
+					</motion.div>
+				)}
+			</AnimatePresence>
 		</div>
 	);
 };

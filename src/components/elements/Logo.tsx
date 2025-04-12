@@ -19,6 +19,7 @@ const Logo = ({ classnames }: LogoProps) => {
 			to='/'
 			className={classnames}>
 			<img
+				id='header-image'
 				className='w-full h-full object-cover'
 				src={scrollY > 0 ? LogoHeaderBlack : LogoHeaderWhite}
 			/>

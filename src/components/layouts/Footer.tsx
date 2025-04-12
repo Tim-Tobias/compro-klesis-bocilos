@@ -1,47 +1,30 @@
 /** @format */
 import { Parallax } from "react-scroll-parallax";
-import HeroImageTwo from "../../assets/home/home-2.jpg";
 import { Outlet } from "react-router-dom";
-import axios from "../../services/axios-client";
 import { FaInstagram, FaTwitter } from "react-icons/fa";
 import SocialIcon from "../elements/SocialIcon";
-import { useEffect, useState } from "react";
-import { ContentItem } from "../../model/Content";
-import { ImageItem } from "../../model/Image";
-
-const links = [
-	{
-		name: "instagram",
-		url: "#",
-		icon: <FaInstagram size={20} />,
-	},
-	{
-		name: "Twitter",
-		url: "#",
-		icon: <FaTwitter size={20} />,
-	},
-];
+import { useSocialMediaStore } from "../../store/social";
+import { useFooterSectionStore } from "../../store/footer";
 
 const FooterLayout = () => {
-	const [content, setContent] = useState<ContentItem>();
-	const [background, setBackground] = useState<ImageItem>();
+	const { socialMedias } = useSocialMediaStore();
+	const { content, background } = useFooterSectionStore();
 
-	useEffect(() => {
-		const fetchHomeSection = async () => {
-			try {
-				const res = await axios.get("/footer-section");
-				const data = res.data.content;
-				const bg = res.data.image;
+	const instagram = socialMedias.find(item => item.name === "instagram");
+	const twitter = socialMedias.find(item => item.name === "twitter");
 
-				setContent(data);
-				setBackground(bg);
-			} catch (error) {
-				console.log(error);
-			}
-		};
-
-		fetchHomeSection();
-	}, []);
+	const links = [
+		{
+			name: instagram?.name,
+			url: instagram?.path,
+			icon: <FaInstagram size={20} />,
+		},
+		{
+			name: twitter?.name,
+			url: twitter?.path,
+			icon: <FaTwitter size={20} />,
+		},
+	];
 
 	return (
 		<>
@@ -72,8 +55,8 @@ const FooterLayout = () => {
 							{links.map((item, index) => (
 								<SocialIcon
 									icon={item.icon}
-									platform={item.name}
-									url={item.url}
+									platform={item?.name}
+									url={item?.url}
 									key={index}
 								/>
 							))}

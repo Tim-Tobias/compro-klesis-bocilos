@@ -7,10 +7,11 @@ import "swiper/css";
 import "swiper/css/effect-fade";
 import { useState } from "react";
 import Button from "../../components/elements/Button";
-import { ImageItem } from "../../model/Image";
+import { useHomeSectionStore } from "../../store/home";
 
-const Jumbotron = ({ images }: { images: ImageItem[] }) => {
+const Jumbotron = () => {
 	const [activeIndex, setActiveIndex] = useState(0);
+	const { images } = useHomeSectionStore();
 
 	const scrolltoSection = function (element_id: string) {
 		console.log("check");
@@ -23,7 +24,7 @@ const Jumbotron = ({ images }: { images: ImageItem[] }) => {
 	};
 
 	return (
-		<div className='overflow-hidden relative'>
+		<div id="home" className='overflow-hidden relative'>
 			<Swiper
 				autoplay={{
 					delay: 2500,

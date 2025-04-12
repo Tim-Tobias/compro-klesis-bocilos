@@ -1,32 +1,11 @@
 /** @format */
-import { useEffect, useState } from "react";
-import { ContentItem } from "../../model/Content";
-import { ImageItem } from "../../model/Image";
-import axios from "../../services/axios-client";
+import { useTeamSectionStore } from "../../store/team";
 
 const Team = () => {
-	const [content, setContent] = useState<ContentItem>();
-	const [images, setImages] = useState<ImageItem[]>([]);
-
-	useEffect(() => {
-		const fetchHomeSection = async () => {
-			try {
-				const res = await axios.get("/team-section");
-				const data = res.data.content;
-				const images = res.data.images;
-
-				setContent(data);
-				setImages(images);
-			} catch (error) {
-				console.log(error);
-			}
-		};
-
-		fetchHomeSection();
-	}, []);
+	const { content, images } = useTeamSectionStore();
 
 	return (
-		<div className='relative w-full lg:h-screen overflow-hidden py-18 px-5'>
+		<div id="team" className='relative w-full lg:h-screen overflow-hidden py-18 px-5'>
 			<h1
 				data-aos='fade-down'
 				data-aos-delay='600'

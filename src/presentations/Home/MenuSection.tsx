@@ -5,6 +5,7 @@ import CategoryFilter from "../../components/elements/CategoryFilter";
 import axios from "../../services/axios-client";
 import { CategoryItem } from "../../model/Category";
 import { MenuItem } from "../../model/Menu";
+import { AnimatePresence, motion } from "framer-motion";
 
 const Menu = () => {
 	const [activeCategory, setActiveCategory] = useState<string>("all");
@@ -54,7 +55,7 @@ const Menu = () => {
 	}, [selectedItem]);
 
 	return (
-		<div className='text-center space-y-5 py-32'>
+		<div id="menu" className='text-center space-y-5 py-32'>
 			<h1 className='text-6xl text-center' data-aos='fade-right'>
 				Today's <span className='text-[#3674b5]'>Menu</span>
 			</h1>
@@ -81,21 +82,27 @@ const Menu = () => {
 				))}
 			</div>
 
-			{selectedItem && (
-				<div className='fixed inset-0 flex items-center justify-center z-50'>
-					<div
-						onClick={() => setSelectedItem(null)}
-						className='bg-black opacity-90 absolute top-0 left-0 w-full h-full'></div>
-					<div className='bg-white p-5 rounded-md shadow-lg max-w-[500px] w-full relative'>
-						<img
-							src={selectedItem.file_path}
-							alt={selectedItem.name}
-							className='w-full h-auto rounded-md'
-						/>
-						<p className='mt-3 text-lg font-serif'>{selectedItem.name}</p>
-					</div>
-				</div>
-			)}
+			<AnimatePresence>
+				{selectedItem && (
+					<motion.div
+						initial={{ opacity: 0 }}
+						animate={{ opacity: 1 }}
+						exit={{ opacity: 0 }}
+						className='fixed inset-0 flex items-center justify-center z-50'>
+						<div
+							onClick={() => setSelectedItem(null)}
+							className='bg-black opacity-90 absolute top-0 left-0 w-full h-full'></div>
+						<div className='bg-white p-5 rounded-md shadow-lg max-w-[500px] w-full relative'>
+							<img
+								src={selectedItem.file_path}
+								alt={selectedItem.name}
+								className='w-full h-auto rounded-md'
+							/>
+							<p className='mt-3 text-lg font-serif'>{selectedItem.name}</p>
+						</div>
+					</motion.div>
+				)}
+			</AnimatePresence>
 		</div>
 	);
 };

@@ -7,57 +7,24 @@
 /** @format */
 
 import { useScroll, useTransform, motion } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import { Parallax } from "react-scroll-parallax";
-import axios from "../../services/axios-client";
-import { ImageItem } from "../../model/Image";
 import { useSignatureTransforms } from "../../hooks/useTransforms";
-import { FileItem } from "../../model/File";
+import { useAmbienceSectionStore } from "../../store/ambience";
 
 const Ambience = () => {
 	const containerRef = useRef<HTMLDivElement>(null);
-	const [images, setImages] = useState<ImageItem[]>([]);
-	const [highlight, setHighlight] = useState<ImageItem>();
-	const [background, setBackground] = useState<ImageItem>();
-	const [file, setFile] = useState<FileItem>();
+	const { background, file, highlight, images } = useAmbienceSectionStore();
 
 	const { scrollYProgress } = useScroll({
 		target: containerRef,
 		offset: ["start start", "center center"],
 	});
 
-	useEffect(() => {
-		const fetchHomeSection = async () => {
-			try {
-				const res = await axios.get("/menu-section");
-				const data = res.data.images;
-				const bg = res.data.background;
-				const file = res.data.file;
-
-				const highlightedItem = data.find(
-					(item: ImageItem) => item.highlight === 1
-				);
-				const imagesData = data.filter(
-					(item: ImageItem) => item.highlight !== 1
-				);
-
-				setHighlight(highlightedItem);
-
-				setImages(imagesData);
-				setBackground(bg);
-				setFile(file);
-			} catch (error) {
-				console.log(error);
-			}
-		};
-
-		fetchHomeSection();
-	}, []);
-
 	const transforms = useSignatureTransforms(scrollYProgress, 5);
 
 	return (
-		<div className='relative bg-black grid grid-cols-1 overflow-clip lg:h-auto pt-18 pb-10 px-5'>
+		<div id="ambience" className='relative bg-black overflow-clip w-full h-full lg:h-fit pt-18 pb-10'>
 			<Parallax
 				className='w-full h-full absolute top-0 left-0'
 				translateY={[-20, 20]}
@@ -70,7 +37,7 @@ const Ambience = () => {
 				<div className='absolute w-full h-full top-0 left-0 bg-black opacity-70'></div>
 			</Parallax>
 
-			<div className='h-[1000px] lg:h-auto'>
+			<div className='w-full'>
 				<h1
 					data-aos='fade-down'
 					data-aos-delay='600'
@@ -80,13 +47,23 @@ const Ambience = () => {
 				</h1>
 
 				{images && (
-					<div className='relative w-full lg:hidden px-5 text-white my-10'>
+					<div className='relative w-full h-full grid grid-cols-1 gap-5 lg:hidden px-5 text-white my-10'>
+						{highlight && (
+							<div className='w-full max-w-[450px] shadow-lg rounded-sm'>
+								<img
+									data-aos='fade-left'
+									className='w-full h-full object-cover'
+									src={highlight.file_path}
+									alt={highlight.description}
+								/>
+							</div>
+						)}
+
 						{images.map((src, index) => {
 							return (
-								<motion.div
+								<div
 									key={index}
-									style={{ y: index * 50 }}
-									className='absolute w-full max-w-[450px] shadow-2xl top-0 left-1/2 mx-auto overflow-hidden rounded-sm -translate-x-1/2'>
+									className='w-full max-w-[450px] shadow-2xl mx-auto rounded-sm'>
 									<img
 										data-aos='fade-left'
 										data-aos-delay={index * 500}
@@ -94,35 +71,33 @@ const Ambience = () => {
 										alt={src.description}
 										className='w-full h-full object-cover'
 									/>
-								</motion.div>
+								</div>
 							);
 						})}
+
+						<div
+							data-aos='fade-left'
+							data-aos-delay='300'
+							className='text-white w-full'>
+							<motion.div className='w-full max-w-[450px] mx-auto h-[600px] shadow-lg rounded-sm text-black px-2'>
+								{file && (
+									<iframe
+										src={file.file_path + "?#view=fitH"}
+										width='100%'
+										height='100%'
+										style={{ border: "none" }}></iframe>
+								)}
+							</motion.div>
+						</div>
 					</div>
 				)}
 			</div>
 
-			<div
-				data-aos='fade-left'
-				data-aos-delay='300'
-				className='text-white w-full h-fit self-end lg:hidden relative'>
-				<motion.div className='relative w-full max-w-[450px] mx-auto h-[600px] bg-white shadow-lg rounded-sm flex items-center text-black '>
-					{file && (
-						<iframe
-							src={file.file_path + "?#view=fitH"}
-							width='100%'
-							height='100%'
-							style={{ border: "none" }}></iframe>
-					)}
-				</motion.div>
-			</div>
-
-			<div ref={containerRef} className='lg:h-[200vh] hidden lg:block'>
-				<div className='sticky top-20 grid grid-cols-2 gap-5 h-screen'>
+			<div ref={containerRef} className='h-full lg:h-[200vh] hidden lg:block'>
+				<div className='sticky top-20 grid grid-cols-2 gap-5 lg:h-screen'>
 					<div className='w-full relative'>
 						{highlight && (
-							<div
-								style={{ zIndex: images.length + 1 }}
-								className='absolute lg:w-[406px] h-full right-0 left-0 bg-white shadow-lg overflow-hidden rounded-sm'>
+							<div className='absolute z-20 lg:w-[406px] h-full right-0 left-0 bg-white shadow-lg overflow-hidden rounded-sm'>
 								<img
 									className='w-full h-full object-cover'
 									src={highlight.file_path}

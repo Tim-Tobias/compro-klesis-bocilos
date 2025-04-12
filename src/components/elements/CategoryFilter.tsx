@@ -2,9 +2,10 @@
 
 import React from "react";
 import { CategoryItem } from "../../model/Category";
+import { BlogCategory } from "../../model/Blog";
 
 interface CategoryFilterProps {
-	categories: CategoryItem[];
+	categories: CategoryItem[] | BlogCategory[];
 	activeCategory: string;
 	onSelectCategory: (category: string) => void;
 }

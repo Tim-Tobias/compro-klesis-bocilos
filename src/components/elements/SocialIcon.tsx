@@ -1,8 +1,8 @@
 /** @format */
 
 interface SocialIconProps {
-	platform: string;
-	url: string;
+	platform?: string;
+	url?: string;
 	icon: React.ReactNode;
 }
 

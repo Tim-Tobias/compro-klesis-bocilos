@@ -2,20 +2,23 @@
 
 import Jumbotron from "./JumbotronSection";
 import Team from "./TeamSection";
-import { ImageItem } from "../../model/Image";
 import Story from "./AboutSection";
 import Signature from "./SignatureSection";
+import Gallery from "./GallerySection";
 import Ambience from "./AmbienceSection";
 import Menu from "./MenuSection";
+import Blog from "./BlogSection";
 
-const Home = ({ images }: { images: ImageItem[] }) => {
+const Home = () => {
 	return (
 		<>
-			<Jumbotron images={images} />
+			<Jumbotron />
 			<Story />
 			<Signature />
 			<Team />
 			<Ambience />
+			<Blog />
+			<Gallery />
 			<Menu />
 		</>
 	);
