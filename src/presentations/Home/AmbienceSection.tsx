@@ -42,8 +42,8 @@ const Ambience = () => {
 					data-aos='fade-down'
 					data-aos-delay='600'
 					className='relative text-[3rem] lg:text-[4.5rem] text-white h-fit uppercase text-center mb-10 lg:mb-30'>
-					Tribute to the product, genuine <br />
-					<span className='text-[#3674b5]'> tastes</span> .
+					Klesis <br />
+					<span className='text-[#3674b5]'> Menu's</span> .
 				</h1>
 
 				{images && (
