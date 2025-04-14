@@ -24,7 +24,7 @@ const Jumbotron = () => {
 	};
 
 	return (
-		<div id="home" className='overflow-hidden relative'>
+		<div id='home' className='overflow-hidden relative'>
 			<Swiper
 				autoplay={{
 					delay: 2500,
@@ -45,6 +45,7 @@ const Jumbotron = () => {
 								translateY={[-20, 20]}
 								speed={0.5}>
 								<img
+									fetchPriority='high'
 									data-aos='fade-in'
 									data-aos-delay='100'
 									className='absolute top-0 left-0 w-full h-full object-cover'

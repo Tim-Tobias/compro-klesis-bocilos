@@ -21,6 +21,7 @@ import BlogDetail from "./presentations/Blog";
 import { useSocialMediaStore } from "./store/social";
 import { useFooterSectionStore } from "./store/footer";
 import { useGalleryStore } from "./store/gallery";
+import { BarLoader } from "react-spinners";
 
 const App = () => {
 	const [loading, setLoading] = useState(true);
@@ -69,6 +70,7 @@ const App = () => {
 					animate={{ opacity: 1 }}
 					exit={{ opacity: 0 }}>
 					<img src={LogoHitam} className='w-[300px]' />
+					<BarLoader />
 				</motion.div>
 			) : (
 				<ParallaxProvider>
