@@ -1,7 +1,7 @@
 /** @format */
 import { Parallax } from "react-scroll-parallax";
 import { Outlet } from "react-router-dom";
-import { FaInstagram, FaTwitter } from "react-icons/fa";
+import { FaInstagram, FaWhatsapp } from "react-icons/fa";
 import SocialIcon from "../elements/SocialIcon";
 import { useSocialMediaStore } from "../../store/social";
 import { useFooterSectionStore } from "../../store/footer";
@@ -11,7 +11,7 @@ const FooterLayout = () => {
 	const { content, background } = useFooterSectionStore();
 
 	const instagram = socialMedias.find(item => item.name === "instagram");
-	const twitter = socialMedias.find(item => item.name === "twitter");
+	const whatsapp = socialMedias.find(item => item.name === "whatsapp");
 
 	const links = [
 		{
@@ -20,9 +20,9 @@ const FooterLayout = () => {
 			icon: <FaInstagram size={20} />,
 		},
 		{
-			name: twitter?.name,
-			url: twitter?.path,
-			icon: <FaTwitter size={20} />,
+			name: whatsapp?.name,
+			url: whatsapp?.path,
+			icon: <FaWhatsapp size={20} />,
 		},
 	];
 
