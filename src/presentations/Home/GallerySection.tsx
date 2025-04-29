@@ -66,7 +66,7 @@ const Gallery = () => {
 						animate={{ opacity: 1 }}
 						exit={{ opacity: 0 }}
 						className='fixed inset-0 z-50 flex items-center justify-center'>
-						<div className='w-[90%] md:w-[70%] lg:w-[80%] bg-white rounded-lg overflow-hidden'>
+						<div className='w-[100%] md:w-[100%] lg:w-[100%] bg-white rounded-lg overflow-hidden'>
 							<div
 								onClick={() => setShowSwiper(false)}
 								className='bg-black bg-opacity-50 absolute w-full h-full top-0 left-0'></div>
