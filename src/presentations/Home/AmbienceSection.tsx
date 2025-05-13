@@ -1,126 +1,129 @@
+/**
+ * eslint-disable react-hooks/rules-of-hooks
+ *
+ * @format
+ */
+
 /** @format */
 
-import BeefRendang from "../../assets/menu/signature/beef-rendang.jpg";
-import DasanaSalad from "../../assets/menu/signature/dasana-salad.jpg";
-import BetawiTenderloin from "../../assets/menu/signature/soto-betawi-tenderloin.jpg";
 import { useScroll, useTransform, motion } from "framer-motion";
 import { useRef } from "react";
-import HeroImageTwo from "../../assets/home/home-2.jpg";
 import { Parallax } from "react-scroll-parallax";
-import { Worker, Viewer } from "@react-pdf-viewer/core";
-import "@react-pdf-viewer/core/lib/styles/index.css";
-
-const signatureMenus = [
-	{
-		url: BeefRendang,
-	},
-	{
-		url: DasanaSalad,
-	},
-	{
-		url: BetawiTenderloin,
-	},
-	{
-		url: BetawiTenderloin,
-	},
-];
+import { useSignatureTransforms } from "../../hooks/useTransforms";
+import { useAmbienceSectionStore } from "../../store/ambience";
 
 const Ambience = () => {
 	const containerRef = useRef<HTMLDivElement>(null);
+	const { background, file, highlight, images } = useAmbienceSectionStore();
 
 	const { scrollYProgress } = useScroll({
 		target: containerRef,
-		offset: ["start start", "end end"],
+		offset: ["start start", "center center"],
 	});
 
+	const transforms = useSignatureTransforms(scrollYProgress, 5);
+
 	return (
-		<div className='relative bg-black grid grid-cols-1 overflow-clip lg:h-auto pt-18 pb-10 px-5'>
+		<div id="ambience" className='relative bg-black overflow-clip w-full h-full lg:h-fit pt-18 pb-10'>
 			<Parallax
 				className='w-full h-full absolute top-0 left-0'
 				translateY={[-20, 20]}
 				speed={1}>
 				<img
 					className='absolute top-0 left-0 w-full h-full object-cover'
-					src={HeroImageTwo}
+					src={background?.file_path}
+					alt={background?.description}
 				/>
 				<div className='absolute w-full h-full top-0 left-0 bg-black opacity-70'></div>
 			</Parallax>
 
-			<div className='h-[1000px] lg:h-auto'>
+			<div className='w-full'>
 				<h1
 					data-aos='fade-down'
 					data-aos-delay='600'
 					className='relative text-[3rem] lg:text-[4.5rem] text-white h-fit uppercase text-center mb-10 lg:mb-30'>
-					Tribute to the product, genuine <br />
-					<span className='text-[#3674b5]'> tastes</span> .
+					Klesis <br />
+					<span className='text-[#3674b5]'> Menu's</span> .
 				</h1>
 
-				<div className='relative w-full lg:hidden px-5 text-white my-10'>
-					{signatureMenus.map((src, index) => {
-						return (
-							<motion.div
-								key={index}
-								style={{ y: index * 50 }}
-								className='absolute w-full max-w-[450px] shadow-2xl top-0 left-1/2 mx-auto overflow-hidden rounded-sm -translate-x-1/2'>
+				{images && (
+					<div className='relative w-full h-full grid grid-cols-1 gap-5 lg:hidden px-5 text-white my-10'>
+						{highlight && (
+							<div className='w-full max-w-[450px] shadow-lg rounded-sm'>
 								<img
 									data-aos='fade-left'
-									data-aos-delay={index * 500}
-									src={src.url}
-									alt={`Image ${index + 1}`}
 									className='w-full h-full object-cover'
+									src={highlight.file_path}
+									alt={highlight.description}
 								/>
-							</motion.div>
-						);
-					})}
-				</div>
-			</div>
+							</div>
+						)}
 
-			<div
-				data-aos='fade-left'
-				data-aos-delay='300'
-				className='text-white w-full h-fit self-end lg:hidden relative'>
-				<motion.div className='relative w-full max-w-[450px] mx-auto h-[600px] bg-white shadow-lg rounded-sm flex items-center text-black '>
-					<Worker workerUrl='https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js'>
-						<div className='w-full h-full'>
-							<Viewer fileUrl='menu-small.pdf' />
-						</div>
-					</Worker>
-				</motion.div>
-			</div>
-
-			<div ref={containerRef} className='lg:h-[200vh] hidden lg:block'>
-				<div className='sticky top-20 grid grid-cols-2 gap-5 h-screen'>
-					<div className='w-full relative'>
-						<div
-							style={{ zIndex: signatureMenus.length + 1 }}
-							className='absolute lg:w-[406px] h-full right-0 left-0 bg-white shadow-lg overflow-hidden rounded-sm'>
-							<img
-								className='w-full h-full object-cover'
-								src={BetawiTenderloin}
-								alt=''
-							/>
-						</div>
-
-						{signatureMenus.map((src, index) => {
-							const x = useTransform(
-								scrollYProgress,
-								[0, 1],
-								[`${(index + 1) * 100}%`, `${(index + 1) * 14}%`]
-							);
-
+						{images.map((src, index) => {
 							return (
-								<motion.div
+								<div
 									key={index}
-									style={{ x, zIndex: signatureMenus.length - index }}
-									className='absolute lg:w-[406px] h-full top-0 left-0 bg-white shadow-lg overflow-hidden rounded-sm'>
+									className='w-full max-w-[450px] shadow-2xl mx-auto rounded-sm'>
 									<img
-										src={src.url}
-										alt={`Image ${index + 1}`}
+										data-aos='fade-left'
+										data-aos-delay={index * 500}
+										src={src.file_path}
+										alt={src.description}
 										className='w-full h-full object-cover'
 									/>
-								</motion.div>
+								</div>
 							);
 						})}
+
+						<div
+							data-aos='fade-left'
+							data-aos-delay='300'
+							className='text-white w-full'>
+							<motion.div className='w-full max-w-[450px] mx-auto h-[600px] shadow-lg rounded-sm text-black px-2'>
+								{file && (
+									<iframe
+										src={file.file_path + "?#view=fitH"}
+										width='100%'
+										height='100%'
+										style={{ border: "none" }}></iframe>
+								)}
+							</motion.div>
+						</div>
+					</div>
+				)}
+			</div>
+
+			<div ref={containerRef} className='h-full lg:h-[200vh] hidden lg:block'>
+				<div className='sticky top-20 grid grid-cols-2 gap-5 lg:h-screen'>
+					<div className='w-full relative'>
+						{highlight && (
+							<div className='absolute z-20 lg:w-[406px] h-full right-0 left-0 bg-white shadow-lg overflow-hidden rounded-sm'>
+								<img
+									className='w-full h-full object-cover'
+									src={highlight.file_path}
+									alt={highlight.description}
+								/>
+							</div>
+						)}
+
+						{images.length > 0 &&
+							images.map((src, index) => {
+								return (
+									<motion.div
+										key={index}
+										style={{
+											x: transforms[index],
+											zIndex: images.length - index,
+										}}
+										className='absolute lg:w-[406px] h-full top-0 left-0 bg-white shadow-lg overflow-hidden rounded-sm'>
+										<img
+											src={src.file_path}
+											alt={src.description}
+											className='w-full h-full object-cover'
+										/>
+									</motion.div>
+								);
+							})}
 					</div>
 
 					<motion.div
@@ -128,16 +131,18 @@ const Ambience = () => {
 							x: useTransform(
 								scrollYProgress,
 								[0, 1],
-								[`${(signatureMenus.length + 1) * 100}%`, `0%`]
+								[`${(images.length + 1) * 100}%`, `0%`]
 							),
-							zIndex: signatureMenus.length + 1,
+							zIndex: images.length + 1,
 						}}
 						className='relative w-full h-screen ml-auto left-0 top-0 shadow-lg rounded-sm flex items-center text-black text-xl font-bold'>
-						<Worker workerUrl='https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js'>
-							<div className='w-full h-full'>
-								<Viewer fileUrl='menu-small.pdf' />
-							</div>
-						</Worker>
+						{file && (
+							<iframe
+								src={file.file_path + "?#view=fitH"}
+								width='100%'
+								height='100%'
+								style={{ border: "none" }}></iframe>
+						)}
 					</motion.div>
 				</div>
 			</div>

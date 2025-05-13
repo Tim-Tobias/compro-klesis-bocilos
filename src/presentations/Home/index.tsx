@@ -1,11 +1,13 @@
 /** @format */
 
-import Story from "./AboutSection";
 import Jumbotron from "./JumbotronSection";
-import Ambience from "./AmbienceSection";
-import Signature from "./SignatureSection";
 import Team from "./TeamSection";
+import Story from "./AboutSection";
+import Signature from "./SignatureSection";
+import Gallery from "./GallerySection";
+import Ambience from "./AmbienceSection";
 import Menu from "./MenuSection";
+import Blog from "./BlogSection";
 
 const Home = () => {
 	return (
@@ -15,6 +17,8 @@ const Home = () => {
 			<Signature />
 			<Team />
 			<Ambience />
+			<Blog />
+			<Gallery />
 			<Menu />
 		</>
 	);

@@ -5,36 +5,14 @@
  */
 
 import { useEffect, useState } from "react";
-import HeroImageTwo from "../../assets/home/home-2.jpg";
-import BeefRendang from "../../assets/menu/signature/beef-rendang.jpg";
-import DasanaSalad from "../../assets/menu/signature/dasana-salad.jpg";
-import BetawiTenderloin from "../../assets/menu/signature/soto-betawi-tenderloin.jpg";
 import { Parallax } from "react-scroll-parallax";
 import ParallaxText from "../../components/elements/ParallaxText";
-
-const signatureMenus = [
-	{
-		url: BeefRendang,
-		from: 50,
-		to: 0,
-		speed: 0.5,
-	},
-	{
-		url: DasanaSalad,
-		from: 150,
-		to: 0,
-		speed: 0.5,
-	},
-	{
-		url: BetawiTenderloin,
-		from: 250,
-		to: 0,
-		speed: 0.1,
-	},
-];
+import { useSignatureStore } from "../../store/signature";
+import { AnimatePresence, motion } from "framer-motion";
 
 const Signature = () => {
 	const [selectedItem, setSelectedItem] = useState<any | null>(null);
+	const { background, images } = useSignatureStore();
 
 	useEffect(() => {
 		if (selectedItem) {
@@ -45,14 +23,15 @@ const Signature = () => {
 	}, [selectedItem]);
 
 	return (
-		<div className='w-full h-full lg:h-[130vh] px-5 py-10 relative overflow-hidden'>
+		<div id="signature" className='w-full h-full lg:h-[130vh] px-5 py-10 relative overflow-hidden'>
 			<Parallax
 				className='w-full h-full absolute top-0 left-0'
 				translateY={[-20, 20]}
 				speed={1}>
 				<img
+					alt={background?.description}
 					className='absolute top-0 left-0 w-full h-full object-cover'
-					src={HeroImageTwo}
+					src={background?.file_path}
 				/>
 				<div className='absolute w-full h-full top-0 left-0 bg-black opacity-70'></div>
 			</Parallax>
@@ -76,29 +55,37 @@ const Signature = () => {
 					</div>
 
 					<div className='relative flex lg:hidden flex-col gap-10 items-center  lg:flex-row w-full h-full justify-between max-w-[1028px] mx-auto mt-20 z-10'>
-						{signatureMenus.map((item, index) => (
+						{images.map((item, index) => (
 							<div
 								key={index}
 								data-aos='fade-down'
 								data-aos-delay='500'
-								className='relative w-full max-w-[300px] h-[350px] overflow-hidden hover:scale-105 transition-transform transition-1000 rounded-xl shadow-lg'>
-								<img src={item.url} className='w-full h-full object-cover ' />
+								className='relative w-full max-w-[300px] h-[650px] overflow-hidden hover:scale-105 transition-transform transition-1000 rounded-xl shadow-lg'>
+								<img
+									src={item.file_path}
+									alt={item.description}
+									className='w-full h-full object-cover '
+								/>
 							</div>
 						))}
 					</div>
 
-					<div className='relative hidden lg:flex flex-col items-center  lg:flex-row w-full h-full justify-between max-w-[1028px] mx-auto mt-20 z-10'>
-						{signatureMenus.map((item, index) => (
+					<div className='relative hidden lg:flex flex-col items-center gap-10 lg:flex-row w-full h-full justify-between max-w-[1028px] mx-auto mt-20 z-10'>
+						{images.map((item, index) => (
 							<Parallax
 								key={index}
-								translateY={[item.from, item.to]}
-								speed={item.speed}>
+								translateY={[50 + index * 100, 0]}
+								speed={0.5}>
 								<div
 									onClick={() => setSelectedItem(item)}
 									data-aos='fade-down'
 									data-aos-delay='500'
-									className='relative w-full max-w-[500] h-[350px] overflow-hidden hover:scale-105 transition-transform transition-1000 rounded-xl shadow-lg'>
-									<img src={item.url} className='w-full h-full object-cover ' />
+									className='relative w-full max-w-[500] h-[500px] overflow-hidden hover:scale-105 transition-transform transition-1000 rounded-xl shadow-lg'>
+									<img
+										src={item.file_path}
+										alt={item.description}
+										className='w-full h-full object-cover '
+									/>
 								</div>
 							</Parallax>
 						))}
@@ -106,16 +93,26 @@ const Signature = () => {
 				</div>
 			</div>
 
-			{selectedItem && (
-				<div className='fixed inset-0 flex items-center justify-center z-50'>
-					<div
-						onClick={() => setSelectedItem(null)}
-						className='bg-black opacity-90 absolute top-0 left-0 w-full h-full'></div>
-					<div className='bg-white p-5 rounded-md shadow-lg max-w-[500px] w-full relative'>
-						<img src={selectedItem.url} className='w-full h-auto rounded-md' />
-					</div>
-				</div>
-			)}
+			<AnimatePresence>
+				{selectedItem && (
+					<motion.div
+						initial={{ opacity: 0 }}
+						animate={{ opacity: 1 }}
+						exit={{ opacity: 0 }}
+						className='fixed inset-0 flex items-center justify-center z-50'>
+						<div
+							onClick={() => setSelectedItem(null)}
+							className='bg-black opacity-90 absolute top-0 left-0 w-full h-full'></div>
+						<div className='bg-white p-5 rounded-md shadow-lg max-w-[500px] w-full relative'>
+							<img
+								src={selectedItem.file_path}
+								alt={selectedItem.description}
+								className='w-full h-auto rounded-md'
+							/>
+						</div>
+					</motion.div>
+				)}
+			</AnimatePresence>
 		</div>
 	);
 };
