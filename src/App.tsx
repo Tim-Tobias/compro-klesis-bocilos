@@ -31,9 +31,11 @@ const App = () => {
 	const { fetchTeamSection } = useTeamSectionStore();
 	const { fetchMenuSection } = useAmbienceSectionStore();
 	const { fetchBlogs, fetchBlogCategories } = useBlogStore();
-	const { fetchSocialMedia } = useSocialMediaStore();
+	const { fetchSocialMedia, socialMedias } = useSocialMediaStore();
 	const { fetchFooterSection } = useFooterSectionStore();
 	const { fetchGallerySection } = useGalleryStore();
+
+	const whatsapp = socialMedias.find(item => item.name === "whatsapp");
 
 	useEffect(() => {
 		const fetchAll = async () => {
@@ -86,6 +88,23 @@ const App = () => {
 						</Routes>
 					</BrowserRouter>
 				</ParallaxProvider>
+			)}
+
+			{whatsapp && (
+				<a
+					href={`${whatsapp.path}&text=Halo%2C%20saya%20ingin%20reservasi`}
+					target='_blank'
+					rel='noopener noreferrer'
+					className='fixed bottom-5 right-5 flex items-center gap-2 bg-white px-4 py-2 rounded shadow-lg hover:shadow-xl transition duration-200 z-50'>
+					<span className='text-green-700 font-medium text-sm'>
+						Reservasi di sini
+					</span>
+					<img
+						src='/whatsApp.webp'
+						alt='WhatsApp'
+						className='w-[40px] h-[40px]'
+					/>
+				</a>
 			)}
 		</div>
 	);
