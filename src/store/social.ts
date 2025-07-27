@@ -20,6 +20,7 @@ export const useSocialMediaStore = create<SocialMediaState>(set => ({
 
 		try {
 			const res = await axios.get("/social-media");
+
 			set({ socialMedias: res.data.social_media, isLoading: false });
 		} catch (error: any) {
 			set({ error: error.message, isLoading: false });

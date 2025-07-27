@@ -75,36 +75,40 @@ const App = () => {
 					<BarLoader />
 				</motion.div>
 			) : (
-				<ParallaxProvider>
-					<BrowserRouter>
-						<Routes>
-							<Route path='/' element={<HeaderLayout />}>
-								<Route path='/' element={<FooterLayout />}>
-									<Route path='/' element={<Home />} />
+				<>
+					<ParallaxProvider>
+						<BrowserRouter>
+							<Routes>
+								<Route path='/' element={<HeaderLayout />}>
+									<Route path='/' element={<FooterLayout />}>
+										<Route path='/' element={<Home />} />
 
-									<Route path='/blog/:id' element={<BlogDetail />} />
+										<Route path='/blog/:id' element={<BlogDetail />} />
+									</Route>
 								</Route>
-							</Route>
-						</Routes>
-					</BrowserRouter>
-				</ParallaxProvider>
-			)}
+							</Routes>
+						</BrowserRouter>
+					</ParallaxProvider>
 
-			{whatsapp && (
-				<a
-					href={`${whatsapp.path}&text=Halo%2C%20saya%20ingin%20reservasi`}
-					target='_blank'
-					rel='noopener noreferrer'
-					className='fixed bottom-5 right-5 flex items-center gap-2 bg-white px-4 py-2 rounded shadow-lg hover:shadow-xl transition duration-200 z-50'>
-					<span className='text-green-700 font-medium text-sm'>
-						Reservasi di sini
-					</span>
-					<img
-						src='/whatsApp.webp'
-						alt='WhatsApp'
-						className='w-[40px] h-[40px]'
-					/>
-				</a>
+					{whatsapp && (
+						<a
+							href={`${whatsapp.path}${
+								whatsapp.path.includes("api") ? "&" : "?"
+							}text=Hello%2C%20I%20would%20like%20to%20make%20a%20reservation`}
+							target='_blank'
+							rel='noopener noreferrer'
+							className='fixed bottom-5 right-5 flex items-center gap-2 border-2 border-green-700 bg-white px-4 py-2 rounded shadow-lg hover:shadow-xl transition duration-200 z-50'>
+							<p className='text-green-700 font-medium text-sm'>
+								Make a reservation here
+							</p>
+							<img
+								src='/whatsApp.webp'
+								alt='WhatsApp'
+								className='w-[40px] h-[40px]'
+							/>
+						</a>
+					)}
+				</>
 			)}
 		</div>
 	);

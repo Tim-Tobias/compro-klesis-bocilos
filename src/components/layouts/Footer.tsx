@@ -1,7 +1,7 @@
 /** @format */
 import { Parallax } from "react-scroll-parallax";
 import { Outlet } from "react-router-dom";
-import { FaInstagram, FaWhatsapp } from "react-icons/fa";
+import { FaFacebook, FaInstagram, FaTiktok, FaWhatsapp } from "react-icons/fa";
 import SocialIcon from "../elements/SocialIcon";
 import { useSocialMediaStore } from "../../store/social";
 import { useFooterSectionStore } from "../../store/footer";
@@ -12,6 +12,8 @@ const FooterLayout = () => {
 
 	const instagram = socialMedias.find(item => item.name === "instagram");
 	const whatsapp = socialMedias.find(item => item.name === "whatsapp");
+	const tiktok = socialMedias.find(item => item.name === "tiktok");
+	const facebook = socialMedias.find(item => item.name === "facebook");
 
 	const links = [
 		{
@@ -23,6 +25,16 @@ const FooterLayout = () => {
 			name: whatsapp?.name,
 			url: whatsapp?.path,
 			icon: <FaWhatsapp size={20} />,
+		},
+		{
+			name: tiktok?.name,
+			url: tiktok?.path,
+			icon: <FaTiktok size={20} />,
+		},
+		{
+			name: facebook?.name,
+			url: facebook?.path,
+			icon: <FaFacebook size={20} />,
 		},
 	];
 
